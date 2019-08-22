@@ -88,8 +88,8 @@ public class TwitterCLIClient {
 //		System.out.println(searchResult);
 //		System.out.println("********* Search Result Ends **********");
 		
-//		Set<Tweet> tweets = controller.getAllTweetsByUser(4);
-//		System.out.println(tweets);		
+		Set<Tweet> tweets = controller.getAllTweetsByUser(4);
+		System.out.println(tweets);		
 		
 	}
 }
