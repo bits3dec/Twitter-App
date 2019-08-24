@@ -5,9 +5,9 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
 import javax.persistence.*;
-
+import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 import com.greatlearning.model.Tweet;
 import com.greatlearning.model.User;
 
@@ -25,10 +25,15 @@ public class User implements Comparable<User>, Serializable {
 	private String userHandle;
 
 	@Column(name = "first_name")
+	@NotBlank(message = "Name cannot be empty")
 	private String firstName;
 
 	@Column(name = "last_name")
 	private String lastName;
+
+	@Column(name = "age")
+	@Range(min = 18, max = 60, message = "Age should be greater than 18")
+	private int age;
 
 	@Column(name = "password")
 	private String password;
@@ -57,12 +62,13 @@ public class User implements Comparable<User>, Serializable {
 	@ManyToMany(mappedBy = "followings", cascade = CascadeType.ALL)
 	private Set<User> followers = new HashSet<User>();
 
-	private User() {}
+	public User() {}
 
-	public User(String userHandle, String firstName, String lastName, String emailAddress, String password, LocalDate createdDate) {
+	public User(String userHandle, String firstName, String lastName, int age, String emailAddress, String password, LocalDate createdDate) {
 		this.userHandle = userHandle;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.age = age;
 		this.emailAddress = emailAddress;
 		this.password = password;
 		this.createdDate = createdDate;
@@ -79,7 +85,6 @@ public class User implements Comparable<User>, Serializable {
 	public String getFirstName() {
 		return firstName;
 	}
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -87,15 +92,20 @@ public class User implements Comparable<User>, Serializable {
 	public String getLastName() {
 		return lastName;
 	}
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -183,6 +193,8 @@ public class User implements Comparable<User>, Serializable {
 		userInString.append(firstName);
 		userInString.append("\n, lastName=");
 		userInString.append(lastName);
+		userInString.append("\n, age=");
+		userInString.append(age);
 		userInString.append("\n, password=");
 		userInString.append(password);
 		userInString.append("\n, emailAddress=");

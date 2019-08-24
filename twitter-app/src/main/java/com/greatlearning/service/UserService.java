@@ -1,5 +1,6 @@
 package com.greatlearning.service;
 
+import java.util.List;
 import java.util.Set;
 
 import com.greatlearning.exception.InvalidUserException;
@@ -13,6 +14,8 @@ public interface UserService {
 	void deleteUser(long userId);
 	
 	User updateUser(long userId, User user);
+	
+	public List<User> getAllUsers();
 	
 	void postTweet(long userId, Tweet tweet);
 	

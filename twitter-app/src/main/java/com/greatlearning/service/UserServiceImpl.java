@@ -1,5 +1,6 @@
 package com.greatlearning.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,11 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+    @Override
+    public List<User> getAllUsers() {
+        return this.userRepository.findAll();
+    }
 
 	@Override
 	public void postTweet(long userId, Tweet tweet) {
