@@ -21,7 +21,7 @@ public class UserController {
 	}
 	
 	public User saveUser(User user) {
-		return this.service.createUser(user);
+		return this.service.saveUser(user);
 	}
 	
 	public void deleteUser(long userId) {

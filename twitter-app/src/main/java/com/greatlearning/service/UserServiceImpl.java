@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 	private TweetRepository tweetRepository;
 	
 	@Override
-	public User createUser(User user) {
+	public User saveUser(User user) {
 		this.userRepository.save(user);	
 		return user;
 	}

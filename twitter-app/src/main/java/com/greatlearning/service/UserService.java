@@ -9,7 +9,7 @@ import com.greatlearning.model.User;
 
 public interface UserService {
 	
-	User createUser(User user);
+	User saveUser(User user);
 	
 	void deleteUser(long userId);
 	

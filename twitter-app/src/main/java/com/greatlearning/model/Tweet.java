@@ -42,7 +42,7 @@ public class Tweet implements Comparable<Tweet>, Serializable {
 	@Column(name = "likes")
 	private int likes;
 
-	private Tweet() {}
+	public Tweet() {}
 	
 	public Tweet(User user, String tweetMsg, LocalDate createdDate) {
 		this.user = user;

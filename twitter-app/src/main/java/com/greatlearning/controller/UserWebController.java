@@ -44,8 +44,7 @@ public class UserWebController {
         if(bindingResult.hasErrors()){
             return "register";
         }
-        System.out.println(user);
-        this.userService.createUser(user);
+        this.userService.saveUser(user);
         return "redirect:/users";//redirect the url
         //dont use the redirect: forwarded and the url will not change
     }
@@ -56,14 +55,23 @@ public class UserWebController {
         model.addAttribute("tweets", tweets);
         return "tweets";
     }
-}
-
-//    @GetMapping("/post-tweet")
-//    public String postTweet(Model model){
-//        model.addAttribute("tweet", new Tweet());
-//        return "post-tweet";
-//    }
-//    @PostMapping("/post-tweet/submit")
+    
+    @GetMapping("/postTweet")
+    public String postTweet(Model model){
+        model.addAttribute("tweet", new Tweet());
+        return "postTweet";
+    }
+    
+    @PostMapping("/postTweet/submit")
+    public String postTweet( @Valid @ModelAttribute("tweet")Tweet tweet, BindingResult bindingResult) {
+    	if(bindingResult.hasErrors()) {
+    		return "postTweet";
+    	}
+    	this.userService.postTweet(30, tweet);
+    	return "redirect:/postTweet";
+    }
+    
+//    @PostMapping("/postTweet/submit")
 //    public String postTweet( @Valid @ModelAttribute("tweet") Tweet tweet,  @Valid @ModelAttribute("user") long userId, BindingResult bindingResult){
 //        if(bindingResult.hasErrors()){
 //            return "post-tweet";
@@ -80,3 +88,5 @@ public class UserWebController {
 //        size: max 150characters
 //
 //     */
+    
+}
