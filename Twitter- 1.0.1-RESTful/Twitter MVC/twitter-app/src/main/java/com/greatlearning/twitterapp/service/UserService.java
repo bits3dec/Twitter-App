@@ -1,8 +1,7 @@
 package com.greatlearning.twitterapp.service;
 
+import java.util.List;
 import java.util.Set;
-
-import com.greatlearning.twitterapp.exception.InvalidUserException;
 import com.greatlearning.twitterapp.model.*;
 
 public interface UserService {
@@ -10,7 +9,8 @@ public interface UserService {
 	void delete(Long userId);
 	User update(Long userId, User updateUser);
 	User find(Long userId);
-	Tweet postTweet(Tweet tweet);
+	List<User> getAllUsers();
+	Tweet postTweet(Long userId, Tweet tweet);
 	void deleteTweet(Long userId, Long tweetId);
 	void deleteAllTweetsByUser(Long userId);
 	Set<Tweet> getAllTweetsByUser(Long userId);

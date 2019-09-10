@@ -10,6 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "tweets")
 public class Tweet implements Comparable<Tweet>, Serializable {
@@ -23,6 +27,7 @@ public class Tweet implements Comparable<Tweet>, Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
+    @JsonBackReference
 	private User user;
 	
 	private int likes;
@@ -39,9 +44,12 @@ public class Tweet implements Comparable<Tweet>, Serializable {
 	public Long getId() {
 		return id;
 	}
-	
+
 	public User getUser() {
 		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	public String getMessage() {
@@ -89,6 +97,10 @@ public class Tweet implements Comparable<Tweet>, Serializable {
 
 	@Override
 	public String toString() {
+		if(user == null) {
+			return "Tweet [id=" + id + ", message=" + message + ", likes=" + likes + ", comments="
+					+ comments + "]";
+		}
 		return "Tweet [id=" + id + ", message=" + message + ", userHandle=" + user.getUserHandle() + ", likes=" + likes + ", comments="
 				+ comments + "]";
 	}

@@ -1,6 +1,7 @@
 package com.greatlearning.twitterapp.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,7 @@ import com.greatlearning.twitterapp.repository.UserRepository;
 @Transactional
 public class UserServiceImpl implements UserService {
 	@Autowired
-	UserRepository userRepository;	
-	
+	UserRepository userRepository;		
 	@Autowired
 	TweetRepository tweetRepository;
 
@@ -44,6 +44,10 @@ public class UserServiceImpl implements UserService {
 			user = validateUser(userId);
 			user.setFirstName(updateUser.getFirstName());
 			user.setLastName(updateUser.getLastName());
+			user.setAge(updateUser.getAge());
+			user.setEmailAddress(updateUser.getEmailAddress());
+			user.setCoverPic(updateUser.getCoverPic());
+			user.setPassword(updateUser.getPassword());
 			user.setProfilePic(updateUser.getProfilePic());
 			user = this.userRepository.save(user);
 		} catch (InvalidUserException e) {
@@ -62,9 +66,21 @@ public class UserServiceImpl implements UserService {
 		}
 		return user;
 	}
+	
+	@Override
+	public List<User> getAllUsers() {
+		return this.userRepository.findAll();
+	}
 
 	@Override
-	public Tweet postTweet(Tweet tweet) {
+	public Tweet postTweet(Long userId, Tweet tweet) {
+		User user = null;
+		try {
+			user = validateUser(userId);
+			tweet.setUser(user);
+		} catch (InvalidUserException e) {
+			e.printStackTrace();
+		}
 		tweet = this.tweetRepository.save(tweet);
 		return tweet;
 	}

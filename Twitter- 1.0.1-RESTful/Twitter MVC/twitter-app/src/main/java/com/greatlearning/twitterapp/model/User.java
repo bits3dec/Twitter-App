@@ -16,6 +16,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "users")
 public class User implements Comparable<User>, Serializable {
@@ -42,6 +46,7 @@ public class User implements Comparable<User>, Serializable {
 	private String coverPic;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonManagedReference
 	private Set<Tweet> tweets = new HashSet<Tweet>();
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -134,6 +139,7 @@ public class User implements Comparable<User>, Serializable {
 		this.tweets.clear();
 	}
 	
+	@JsonIgnore
 	public Set<User> getFollowings() {
 		return followings;
 	}
@@ -146,6 +152,7 @@ public class User implements Comparable<User>, Serializable {
 		following.removeFollowers(this);
 	}
 	
+	@JsonIgnore
 	public Set<User> getFollowers() {
 		return followers;
 	}

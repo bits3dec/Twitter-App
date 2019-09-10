@@ -30,8 +30,8 @@ public class UserController {
 		this.userService.delete(userId);
 	}
 	
-	public Tweet postTweet(Tweet tweet) {
-		tweet = this.userService.postTweet(tweet);
+	public Tweet postTweet(Long userId, Tweet tweet) {
+		tweet = this.userService.postTweet(userId, tweet);
 		return tweet;
 	}
 	
