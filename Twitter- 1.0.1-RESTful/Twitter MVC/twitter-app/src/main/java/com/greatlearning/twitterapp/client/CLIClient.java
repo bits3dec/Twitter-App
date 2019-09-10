@@ -57,11 +57,11 @@ public class CLIClient {
 			System.out.println("***** Post a tweet  *****");
 			String tweetMessage = sc2.nextLine();
 			Tweet tweet1 = new Tweet(tweetMessage, user1);
-			controller.postTweet(tweet1);
+			controller.postTweet(userId1, tweet1);
 			Tweet mockTweet2 = new Tweet("MockTweet1", user1);
-			controller.postTweet(mockTweet2);
+			controller.postTweet(userId1, mockTweet2);
 			Tweet mockTweet3 = new Tweet("MockTweet2", user1);
-			controller.postTweet(mockTweet3);
+			controller.postTweet(userId1, mockTweet3);
 		}
 		
 		System.out.println("***** (2) Enter your userId *****");
@@ -71,7 +71,7 @@ public class CLIClient {
 			System.out.println("***** Post a tweet  *****");
 			String tweetMessage = sc2.nextLine();
 			Tweet tweet1 = new Tweet(tweetMessage, user2);
-			controller.postTweet(tweet1);
+			controller.postTweet(userId2, tweet1);
 		}
 	}
 	

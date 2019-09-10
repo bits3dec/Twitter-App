@@ -1,6 +1,7 @@
 package com.greatlearning.twitterapp.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,9 +63,21 @@ public class UserServiceImpl implements UserService {
 		}
 		return user;
 	}
+	
+	@Override
+	public List<User> getAllUsers() {
+		return this.userRepository.findAll();
+	}
 
 	@Override
-	public Tweet postTweet(Tweet tweet) {
+	public Tweet postTweet(Long userId, Tweet tweet) {
+		User user = null;
+		try {
+			user = validateUser(userId);
+			tweet.setUser(user);
+		} catch (InvalidUserException e) {
+			e.printStackTrace();
+		}
 		tweet = this.tweetRepository.save(tweet);
 		return tweet;
 	}
