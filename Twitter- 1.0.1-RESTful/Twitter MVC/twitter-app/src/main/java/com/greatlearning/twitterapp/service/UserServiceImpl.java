@@ -17,8 +17,7 @@ import com.greatlearning.twitterapp.repository.UserRepository;
 @Transactional
 public class UserServiceImpl implements UserService {
 	@Autowired
-	UserRepository userRepository;	
-	
+	UserRepository userRepository;		
 	@Autowired
 	TweetRepository tweetRepository;
 
@@ -45,6 +44,10 @@ public class UserServiceImpl implements UserService {
 			user = validateUser(userId);
 			user.setFirstName(updateUser.getFirstName());
 			user.setLastName(updateUser.getLastName());
+			user.setAge(updateUser.getAge());
+			user.setEmailAddress(updateUser.getEmailAddress());
+			user.setCoverPic(updateUser.getCoverPic());
+			user.setPassword(updateUser.getPassword());
 			user.setProfilePic(updateUser.getProfilePic());
 			user = this.userRepository.save(user);
 		} catch (InvalidUserException e) {
