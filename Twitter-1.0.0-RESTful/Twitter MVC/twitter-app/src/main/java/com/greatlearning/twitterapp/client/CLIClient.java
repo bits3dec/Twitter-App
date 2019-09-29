@@ -13,13 +13,15 @@ public class CLIClient {
 	private static Scanner sc2 = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-//		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
-//		controller = applicationContext.getBean(UserController.class);
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
+		controller = applicationContext.getBean(UserController.class);
 		
+		
+		System.out.println("** Came Inside ***");
 //		createUsers();
 //		postTweets();
 //		getTweetsByUser();
-//		follow();
+		follow();
 //		unfollow();
 //		updateUser();
 //	    deleteUser();
@@ -107,12 +109,12 @@ public class CLIClient {
 	
 	private static void follow() {	
 		controller.follow(1L, 2L);
-		controller.follow(1L, 3L);
-		controller.follow(1L, 4L);
-		controller.follow(2L, 1L);
-		controller.follow(2L, 3L);
-		controller.follow(4L, 5L);
-		controller.follow(5L, 3L);
+//		controller.follow(1L, 3L);
+//		controller.follow(1L, 4L);
+//		controller.follow(2L, 1L);
+//		controller.follow(2L, 3L);
+//		controller.follow(4L, 5L);
+//		controller.follow(5L, 3L);
 	}
 	
 	private static void unfollow() {	
